@@ -1,6 +1,6 @@
 module BucketListHelper
-  
- require 'aws-sdk' 
+
+ require 'aws-sdk'
   @@client =""
   BUCKET_NAME = 'filmarks-env-list'
 
@@ -14,22 +14,22 @@ module BucketListHelper
     #@@client.list_objects(:bucket => 'filmarks-env-list').contents.each do |object|
     #    puts object.key
     #end
-    
+
     resp = @@client.list_objects(bucket: BUCKET_NAME)
     resp.contents.map(&:key)
-    
+
   end
 
-  def file_download 
+  def file_download
 
-    File.open("/home/kaka/docker/mang_env_val_with_s3/tmp/kaka22", "w") do |file|   @@client.get_object(bucket: BUCKET_NAME, key: "envrc_unicorn_staging") do |chunk|     file.write chunk   end end
+    File.open("/tmp/kaka22", "w") do |file|   @@client.get_object(bucket: BUCKET_NAME, key: "envrc_unicorn_staging") do |chunk|     file.write chunk   end end
 
 
   end
 
   def file_upload
 
-    file = File.open('/home/kaka/docker/mang_env_val_with_s3/tmp/kaka')
+    file = File.open('/tmp/kaka')
     #file = File.open('/tmp/keke/haha')
     #file_name = File.basename('/tmp/keke2')
     file_name = File.basename('koko')
@@ -39,6 +39,45 @@ module BucketListHelper
           body: file,
             key: file_name
     )
+  end
+
+  def get_export2
+      p "h2"
+  end
+
+  def get_export
+      #p "h2"
+
+    #@@kk ={}
+    @@kk = {"Lemon" => 100, "Orange" => 150}
+    begin
+      File.foreach("/tmp/kaka22") do | line |
+        #puts line
+        #' ' ""を全部削除してから？
+      #puts "h2"
+
+     ##＃@@kk =env_convert_hash(line) if line =~ /export /
+     @kkk =(env_convert_hash(line)) if line =~ /export /
+      #@@kk.store("keke",11)
+      puts @kkk.class
+      puts @@kk.class
+      #puts @kkk
+
+
+      @@kk.merge!(@kkk)
+      #puts @@kk
+      #puts hh.class
+      #puts @env_list
+      end
+    rescue SystemCallError => e
+       puts %Q(class=[#{e.class}] message=[#{e.message}])
+    end
+puts "hihihi"
+puts @@kk
+puts @@kk.class
+     return @@kk
+
+         #reture @@hh
   end
 
   # def self.get_files_list
@@ -78,6 +117,13 @@ module BucketListHelper
     #     :secret_access_key => 'your secret_access_key'
     # )
     # DEFAULT_HOST.replace('s3-ap-northeast-1.amazonaws.com')
+  end
+
+  def env_convert_hash(str)
+    #str.scan(/(\w+):\s+(\d+)/).map{|k, v| [k.to_sym, v.to_i] }.to_h
+     str.scan(/(\w+)=["']?(.\w*)["']?/).map{|k,v| [k.to_sym, v.to_sym]}.to_h
+
+    #puts str
   end
 
 end

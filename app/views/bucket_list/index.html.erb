@@ -1,9 +1,39 @@
-hello
+bucket_list
+<br>
+<br>
+
 <%= bucket_list %>
 <br>
 <br>
+file_list
 <%= file_list %>
 <br>
 <br>
+file_upload
 <%= file_upload %>
+<br>
+<br>
+
+file_download
 <%= file_download %>
+<br>
+<br>
+get_export
+
+
+<%=@hoho = get_export %>
+
+<% @hoho.each do | k,v | %>
+key:  <%= text_field_tag :key, k %>
+value:<%= text_field_tag :key, v %>
+<p>
+<% end %>
+
+
+
+<% writers = ['浅田次郎', '道尾秀介', '重松清'] %>
+<p>
+<% writers.each do |writer| %>
+<%= writer %>さん。
+<% end %>
+</p>
