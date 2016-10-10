@@ -1,0 +1,15 @@
+bucket_deatil dayo
+
+<%= params %>
+
+<%=params[:name] %>
+
+<% bucket_list %>
+<% file_download("#{params[:name]}") %>
+
+<br>
+<% get_export.each do | k,v | %>
+key:  <%= text_field_tag :key, k %>
+value:<%= text_field_tag :key, v %>
+<p>
+<% end %>

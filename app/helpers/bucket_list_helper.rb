@@ -1,6 +1,6 @@
 module BucketListHelper
-
  require 'aws-sdk'
+
   @@client =""
   BUCKET_NAME = 'filmarks-env-list'
 
@@ -14,15 +14,17 @@ module BucketListHelper
     #@@client.list_objects(:bucket => 'filmarks-env-list').contents.each do |object|
     #    puts object.key
     #end
-
-    resp = @@client.list_objects(bucket: BUCKET_NAME)
+     require 'aws-sdk'
+     #BUCKET_NAME = 'filmarks-env-list'
+    resp = @@client.list_objects(bucket: 'filmarks-env-list')
     resp.contents.map(&:key)
 
   end
 
-  def file_download
-
-    File.open("/tmp/kaka22", "w") do |file|   @@client.get_object(bucket: BUCKET_NAME, key: "envrc_unicorn_staging") do |chunk|     file.write chunk   end end
+  def file_download(bucket_name)
+    filename = '/tmp/kaka22'
+    File.unlink filename if File.exist?(filename)
+    File.open(filename, "w") do |file|   @@client.get_object(bucket: "filmarks-env-list", key: bucket_name) do |chunk|     file.write chunk   end end
 
 
   end
@@ -64,7 +66,7 @@ module BucketListHelper
       #puts @kkk
 
 
-      @@kk.merge!(@kkk)
+      @@kk.merge!(@kkk) if @kkk
       #puts @@kk
       #puts hh.class
       #puts @env_list

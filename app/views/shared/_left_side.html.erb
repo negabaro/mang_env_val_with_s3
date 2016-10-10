@@ -1,1 +1,9 @@
-left side dayo
+
+<% bucket_list %>
+<% file_list.each do |list| %>
+
+
+
+<%= link_to list, :controller => "bucket_detail", :action => "index", name: list %>
+<br>
+<% end %>

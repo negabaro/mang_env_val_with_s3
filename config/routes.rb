@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   root 'bucket_list#index'
+  #get 'bucket_detail#index'
+   resources :bucket_detail
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
