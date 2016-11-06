@@ -10,9 +10,13 @@
   height: 80px;
 }
 
+#body{
+  height: 800px;
+}
 #main {
   float: right;
-  width: 550px;
+  width: 450px;
+
 }
 
 #linkList {
@@ -20,10 +24,15 @@
   width: 200px;
 }
 
-#footer {
-  //background-color: #eedddd;
-  height: 40px;
+#left_side {
+  float: left;
+  width: 150px;
 }
+
+//#footer {
+  //background-color: #eedddd;
+//  height: 40px;
+//}
 
 
 

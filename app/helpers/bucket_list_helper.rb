@@ -61,8 +61,8 @@ module BucketListHelper
      ##＃@@kk =env_convert_hash(line) if line =~ /export /
      @kkk =(env_convert_hash(line)) if line =~ /export /
       #@@kk.store("keke",11)
-      puts @kkk.class
-      puts @@kk.class
+      #puts @kkk.class
+      #puts @@kk.class
       #puts @kkk
 
 
@@ -123,7 +123,10 @@ puts @@kk.class
 
   def env_convert_hash(str)
     #str.scan(/(\w+):\s+(\d+)/).map{|k, v| [k.to_sym, v.to_i] }.to_h
-     str.scan(/(\w+)=["']?(.\w*)["']?/).map{|k,v| [k.to_sym, v.to_sym]}.to_h
+
+    #str.scan(/(\w+)=["']?(.\w*)["']?/).map{|k,v| [k.to_sym, v.to_sym]}.to_h
+    str.scan(/(\w+)=["']?([^"']*)["']?/).map{|k,v| [k.to_sym, v.to_sym]}.to_h
+     #str.scan(/(\w+)=["']?(\w++)["']?/).map{|k,v| [k.to_sym, v.to_sym]}.to_h
 
     #puts str
   end
